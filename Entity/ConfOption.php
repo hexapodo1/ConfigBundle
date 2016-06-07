@@ -36,7 +36,7 @@ class ConfOption
     private $position;
     
     /**
-     * @ORM\ManyToOne(targetEntity="ConfParameter", inversedBy="parameters")
+     * @ORM\ManyToOne(targetEntity="ConfParameter", inversedBy="options")
      * @ORM\JoinColumn(name="parameter_id", referencedColumnName="id")
      */
     private $parameter;

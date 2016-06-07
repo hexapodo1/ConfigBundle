@@ -33,13 +33,6 @@ class ConfParameter
      * @ORM\Column(name="description", type="text")
      */
     private $description;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="value", type="string", length=255)
-     */
-    private $value;
     
     /**
      * @ORM\ManyToOne(targetEntity="ConfCategory", inversedBy="parameters")
@@ -51,7 +44,11 @@ class ConfParameter
      * @ORM\OneToMany(targetEntity="ConfOption", mappedBy="parameter")
      */
     private $options;
-
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ConfValue", mappedBy="parameter")
+     */
+    private $values;
 
     /**
      * Get id
@@ -84,36 +81,6 @@ class ConfParameter
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set value
-     *
-     * @param string $value
-     * @return ConfParameter
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Get value
-     *
-     * @return string 
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->options = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -197,5 +164,46 @@ class ConfParameter
     
     public function __toString() {
         return $this->name;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->options = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->values = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add values
+     *
+     * @param \Kishron\ConfigBundle\Entity\ConfValue $values
+     * @return ConfParameter
+     */
+    public function addValue(\Kishron\ConfigBundle\Entity\ConfValue $values)
+    {
+        $this->values[] = $values;
+
+        return $this;
+    }
+
+    /**
+     * Remove values
+     *
+     * @param \Kishron\ConfigBundle\Entity\ConfValue $values
+     */
+    public function removeValue(\Kishron\ConfigBundle\Entity\ConfValue $values)
+    {
+        $this->values->removeElement($values);
+    }
+
+    /**
+     * Get values
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getValues()
+    {
+        return $this->values;
     }
 }
