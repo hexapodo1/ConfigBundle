@@ -96,6 +96,7 @@ class ConfModule
     {
         return $this->code;
     }
+    
     /**
      * Constructor
      */

@@ -29,6 +29,13 @@ class ConfProfile
     private $name;
     
     /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=100, nullable=true, unique=true)
+     */
+    private $code;
+    
+    /**
      * @ORM\OneToMany(targetEntity="ConfValue", mappedBy="profile")
      */
     private $values;
@@ -105,5 +112,28 @@ class ConfProfile
     public function getValues()
     {
         return $this->values;
+    }
+    
+    /**
+     * Set code
+     *
+     * @param string $code
+     * @return ConfModule
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string 
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }

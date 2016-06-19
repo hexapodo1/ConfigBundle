@@ -206,4 +206,20 @@ class ConfParameter
     {
         return $this->values;
     }
+    
+    /**
+     * Get values
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getValue($codeProfile)
+    {
+        $valueR = null;
+        foreach ($this->values as $value) {
+            if ($value->getProfile()->getCode() === $codeProfile) {
+                $valueR = $value;
+            }
+        }
+        return $valueR;
+    }
 }
